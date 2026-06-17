@@ -53,8 +53,8 @@ full = [
 ]
 
 [project.urls]
-Repository = "https://github.com/voltwizeshea/GRAVITAS"
-Documentation = "https://github.com/voltwizeshea/GRAVITAS"
+Repository = "https://github.com/DarkMatter-Security/GRAVITAS"
+Documentation = "https://github.com/DarkMatter-Security/GRAVITAS"
 
 [project.scripts]
 gravitas = "gravitas.__main__:main"

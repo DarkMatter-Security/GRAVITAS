@@ -6,7 +6,7 @@
 
 ---
 
-**Part of the [Dark Matter Security](https://github.com/voltwizeshea/DarkMatter_Security) universe.** — Invisible Influence. Indirect Intelligence.
+**Part of the [Dark Matter Security](https://github.com/DarkMatter-Security/DarkMatter_Security) universe.** — Invisible Influence. Indirect Intelligence.
 
 ---
 
@@ -31,7 +31,7 @@ V1 ─► V2 ─► V3 ─► V4 ─► V5 ─► V6 ─► V7 ─► V8
 pip install gravitas
 
 # Or from source
-git clone https://github.com/voltwizeshea/GRAVITAS.git
+git clone https://github.com/DarkMatter-Security/GRAVITAS.git
 cd GRAVITAS
 pip install -e .
 
