@@ -119,7 +119,15 @@ def load_config(path: Optional[str] = None) -> GRAVITASConfig:
     """Load configuration from file or create defaults."""
     global _config
     
-    config_path = Path(path) if path else DEFAULT_CONFIG_DIR / "config.yaml"
+    if path:
+        config_path = Path(path)
+    else:
+        # Try user config first, then shipped default
+        config_path = DEFAULT_CONFIG_DIR / "config.yaml"
+        if not config_path.exists():
+            shipped = Path(__file__).resolve().parent.parent.parent.parent / "config" / "default.yaml"
+            if shipped.exists():
+                config_path = shipped
     
     if config_path.exists():
         import yaml
@@ -128,7 +136,7 @@ def load_config(path: Optional[str] = None) -> GRAVITASConfig:
         _config = _dict_to_config(data)
     else:
         _config = GRAVITASConfig()
-        # Save defaults
+        # Save defaults to user dir
         DEFAULT_CONFIG_DIR.mkdir(parents=True, exist_ok=True)
         save_config(_config)
     

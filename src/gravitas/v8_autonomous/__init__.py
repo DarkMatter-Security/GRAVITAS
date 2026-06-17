@@ -18,21 +18,28 @@ class AutonomousEngine:
         self.action_history: List = []
 
     async def decide(self, predictions: list) -> List[Dict[str, Any]]:
-        """Decide on actions based on predictions."""
+        """Decide on actions based on predictions.
+        
+        Accepts both dicts (from V5 probability engine) and objects.
+        """
         actions = []
         for p in predictions:
-            risk = getattr(p, 'probability', 0)
+            risk = p.get('probability', 0) if isinstance(p, dict) else getattr(p, 'probability', 0)
+            target = p.get('target', 'unknown') if isinstance(p, dict) else getattr(p, 'target', 'unknown')
+            pred_id = p.get('id', '') if isinstance(p, dict) else getattr(p, 'id', '')
             if risk > 0.8:
                 actions.append({
-                    "node": getattr(p, 'target', 'unknown'),
+                    "node": target,
                     "action": "ISOLATE + DEPLOY DECOY",
                     "confidence": risk,
+                    "prediction_id": pred_id,
                 })
             elif risk > 0.5:
                 actions.append({
-                    "node": getattr(p, 'target', 'unknown'),
+                    "node": target,
                     "action": "MONITOR + LOG",
                     "confidence": risk,
+                    "prediction_id": pred_id,
                 })
         self.action_history.extend(actions)
         return actions
