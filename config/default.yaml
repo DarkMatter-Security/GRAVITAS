@@ -1,0 +1,61 @@
+# GRAVITAS — Default Configuration
+# Dark Matter Security — Invisible Influence / Indirect Intelligence
+
+system:
+  debug: false
+  log_level: INFO
+  data_dir: ~/.gravitas/data
+
+v1_ingestion:
+  enabled: true
+  poll_interval: 60
+  max_batch_size: 1000
+  sources:
+    - file
+    - api
+    - omnipentestx
+  omnipentestx_db_path: ~/.omnipentestx/omnipentestx.db
+  file_watch_dirs: []
+
+v2_processing:
+  enabled: true
+  normalize_text: true
+  extract_entities: true
+  deduplicate: true
+  enrichment_sources: []
+
+v3_inference:
+  enabled: false
+  model_path: ""
+  confidence_threshold: 0.7
+  use_local_llm: false
+
+v4_graph:
+  enabled: false
+  backend: networkx
+  neo4j_uri: bolt://localhost:7687
+  neo4j_user: neo4j
+  neo4j_password: ""
+
+v5_probability:
+  enabled: false
+  risk_threshold_high: 0.8
+  risk_threshold_medium: 0.5
+  enable_monte_carlo: false
+
+v6_temporal:
+  enabled: false
+  window_size: 3600
+  trend_sensitivity: 0.3
+
+v7_digital_twin:
+  enabled: false
+  sync_interval: 300
+  fidelity: high
+
+v8_autonomous:
+  enabled: false
+  auto_respond: false
+  deploy_decoys: false
+  max_actions_per_cycle: 5
+  require_approval: true

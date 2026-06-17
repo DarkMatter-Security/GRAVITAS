@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  gravitas:
+    build: .
+    container_name: gravitas
+    volumes:
+      - ~/.gravitas:/root/.gravitas
+      - ~/.omnipentestx:/root/.omnipentestx:ro
+    command: python -m gravitas pipeline
+    restart: unless-stopped
+    networks:
+      - gravitas-net
+
+  # Future: Neo4j for V4 Graph
+  # neo4j:
+  #   image: neo4j:5
+  #   environment:
+  #     NEO4J_AUTH: neo4j/gravitas123
+  #   ports:
+  #     - "7474:7474"
+  #     - "7687:7687"
+  #   volumes:
+  #     - neo4j-data:/data
+
+  # Future: Kafka for V6 Streaming
+  # zookeeper:
+  #   image: confluentinc/cp-zookeeper:latest
+  # kafka:
+  #   image: confluentinc/cp-kafka:latest
+
+networks:
+  gravitas-net:
+    driver: bridge
+
+volumes:
+  neo4j-data:

@@ -1,0 +1,75 @@
+[project]
+name = "gravitas"
+version = "0.1.0.dev1"
+description = "GRAVITAS — Inference-Based Reconnaissance & Predictive Intelligence Platform"
+readme = "README.md"
+license = { text = "GPL-3.0-only" }
+requires-python = ">=3.11"
+
+authors = [
+    { name = "AntiSyntax.protocol CREW" },
+    { name = "voltwizeshea" },
+]
+
+keywords = [
+    "cyber-intelligence", "predictive-security", "digital-twin",
+    "threat-detection", "autonomous-defense", "dark-matter-security",
+]
+
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Security",
+    "Topic :: Security :: Threat Intelligence",
+]
+
+dependencies = [
+    "rich>=13.0",
+    "click>=8.0",
+    "pydantic>=2.0",
+    "pyyaml>=6.0",
+    "requests>=2.31",
+    "aiohttp>=3.8",
+    "fastapi>=0.100",
+    "uvicorn[standard]>=0.22",
+    "aiosqlite>=0.19",
+    "networkx>=3.0",
+    "numpy>=1.24",
+    "scikit-learn>=1.3",
+]
+
+[project.optional-dependencies]
+full = [
+    "torch>=2.0",
+    "neo4j>=5.0",
+    "kafka-python>=2.0",
+    "websockets>=11",
+    "pandas>=2.0",
+    "matplotlib>=3.7",
+    "docker>=6.0",
+]
+
+[project.urls]
+Repository = "https://github.com/voltwizeshea/GRAVITAS"
+Documentation = "https://github.com/voltwizeshea/GRAVITAS"
+
+[project.scripts]
+gravitas = "gravitas.__main__:main"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["gravitas*"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
