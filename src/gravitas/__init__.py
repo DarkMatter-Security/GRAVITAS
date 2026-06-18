@@ -12,9 +12,15 @@ Architecture V1→V8:
   V8: Autonomous Engine   — Self-acting defense & deception deployment
 
 Built by AntiSyntax.protocol CREW.
-Dark Matter Security — Invisible Influence / Indirect Intelligence.
+DarkMatter Security — Invisible Influence / Indirect Intelligence.
+
+Part of the OmniGRAVITAS Fusion Platform.
 """
 
-__version__ = "0.1.0.dev1"
+__version__ = "0.2.0.dev1"
 __description__ = "Inference-Based Reconnaissance & Predictive Intelligence Platform"
 VERSION_CODENAME = "Dark Matter"
+
+__author__ = "AntiSyntax.protocol CREW / DarkMatter Security"
+__license__ = "GPL-3.0-only"
+__copyright__ = "Copyright 2026 DarkMatter Security"

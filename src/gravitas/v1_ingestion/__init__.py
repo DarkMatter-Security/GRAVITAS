@@ -177,7 +177,7 @@ class OmniPentestXCollector(BaseCollector):
                         timestamp=row_dict.get("created_at", self._now()),
                     ))
 
-            # Extract findings
+                    # Extract findings
             if "findings" in tables:
                 cursor.execute("SELECT * FROM findings ORDER BY timestamp DESC LIMIT 200")
                 for row in cursor.fetchall():
@@ -189,7 +189,8 @@ class OmniPentestXCollector(BaseCollector):
                         event_type="finding",
                         severity=EventSeverity.from_string(severity),
                         data=row_dict,
-                        timestamp=row_dict.get("created_at", self._now()),
+                        # findings table uses ``timestamp`` (not ``created_at``)
+                        timestamp=row_dict.get("timestamp", self._now()),
                     ))
 
             conn.close()

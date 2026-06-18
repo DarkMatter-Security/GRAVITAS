@@ -5,10 +5,9 @@ __pycache__/
 dist/
 build/
 *.egg
-.eggs/
+*.whl
 
-# Environment
-.env
+# Virtual env
 .venv/
 venv/
 env/
@@ -19,16 +18,31 @@ env/
 *.swp
 *.swo
 
+# Config (user-specific, keep default.yaml)
+.gravitas/
+config/*.yaml
+!config/default.yaml
+
 # OS
 .DS_Store
 Thumbs.db
 
 # Logs
 *.log
+logs/
 
-# Docker
-docker-data/
-
-# Data
+# Database
 *.db
 *.sqlite
+
+# Models (downloaded ML models)
+models/
+
+# Environment
+.env
+*.env
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/

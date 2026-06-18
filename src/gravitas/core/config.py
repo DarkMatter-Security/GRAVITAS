@@ -40,7 +40,7 @@ class ProcessingConfig:
 @dataclass
 class InferenceConfig:
     """V3: Inference settings."""
-    enabled: bool = False
+    enabled: bool = True
     model_path: str = ""
     confidence_threshold: float = 0.7
     use_local_llm: bool = False
@@ -49,7 +49,7 @@ class InferenceConfig:
 @dataclass
 class GraphConfig:
     """V4: Graph settings."""
-    enabled: bool = False
+    enabled: bool = True
     backend: str = "networkx"  # networkx, neo4j
     neo4j_uri: str = "bolt://localhost:7687"
     neo4j_user: str = "neo4j"
@@ -59,7 +59,7 @@ class GraphConfig:
 @dataclass
 class ProbabilityConfig:
     """V5: Probability & Risk scoring."""
-    enabled: bool = False
+    enabled: bool = True
     risk_threshold_high: float = 0.8
     risk_threshold_medium: float = 0.5
     enable_monte_carlo: bool = False
@@ -68,7 +68,7 @@ class ProbabilityConfig:
 @dataclass
 class TemporalConfig:
     """V6: Temporal analysis."""
-    enabled: bool = False
+    enabled: bool = True
     window_size: int = 3600  # 1 hour in seconds
     trend_sensitivity: float = 0.3
 
@@ -76,7 +76,7 @@ class TemporalConfig:
 @dataclass
 class DigitalTwinConfig:
     """V7: Digital Twin settings."""
-    enabled: bool = False
+    enabled: bool = True
     sync_interval: int = 300
     fidelity: str = "high"  # low, medium, high
 
@@ -84,7 +84,7 @@ class DigitalTwinConfig:
 @dataclass
 class AutonomousConfig:
     """V8: Autonomous Engine settings."""
-    enabled: bool = False
+    enabled: bool = True
     auto_respond: bool = False
     deploy_decoys: bool = False
     max_actions_per_cycle: int = 5
@@ -95,9 +95,11 @@ class AutonomousConfig:
 class GRAVITASConfig:
     """Root configuration for GRAVITAS platform."""
     # System
+    version: str = "0.2.0.dev1"
     debug: bool = False
     log_level: str = "INFO"
     data_dir: str = str(DEFAULT_DATA_DIR)
+    organization: str = "DarkMatter Security"
     
     # Pipeline stages
     v1_ingestion: IngestionConfig = field(default_factory=IngestionConfig)
@@ -173,7 +175,11 @@ def config_to_dict(config: GRAVITASConfig) -> Dict[str, Any]:
 
 
 def _dict_to_config(data: Dict[str, Any]) -> GRAVITASConfig:
-    """Convert dictionary back to config dataclass (recursive)."""
+    """Convert dictionary back to config dataclass (recursive).
+
+    Handles both flat configs and YAML-nested ``system:`` key gracefully.
+    """
+    from .. import __version__
 
     _CONFIG_CLASSES = {
         "v1_ingestion": IngestionConfig,
@@ -187,6 +193,12 @@ def _dict_to_config(data: Dict[str, Any]) -> GRAVITASConfig:
     }
 
     kwargs = {}
+
+    # Unwrap ``system:`` nesting if present (YAML default.yaml convention)
+    system_block = data.pop("system", {})
+    if isinstance(system_block, dict):
+        data = {**system_block, **data}
+
     for k, v in data.items():
         if k not in GRAVITASConfig.__dataclass_fields__:
             continue
@@ -199,4 +211,7 @@ def _dict_to_config(data: Dict[str, Any]) -> GRAVITASConfig:
             })
         else:
             kwargs[k] = v
+
+    # Always stamp the current version
+    kwargs.setdefault("version", __version__)
     return GRAVITASConfig(**kwargs)

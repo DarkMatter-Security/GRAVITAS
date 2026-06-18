@@ -1,29 +1,31 @@
 [project]
 name = "gravitas"
-version = "0.1.0.dev1"
-description = "GRAVITAS — Inference-Based Reconnaissance & Predictive Intelligence Platform"
+version = "0.2.0.dev1"
+description = "GRAVITAS — Inference-Based Reconnaissance & Predictive Intelligence Platform (OmniGRAVITAS Fusion)"
 readme = "README.md"
 license = { text = "GPL-3.0-only" }
 requires-python = ">=3.11"
 
 authors = [
-    { name = "AntiSyntax.protocol CREW" },
+    { name = "AntiSyntax.protocol CREW / DarkMatter Security" },
     { name = "voltwizeshea" },
 ]
 
 keywords = [
     "cyber-intelligence", "predictive-security", "digital-twin",
     "threat-detection", "autonomous-defense", "dark-matter-security",
+    "omnigravitas", "pentest", "security",
 ]
 
 classifiers = [
-    "Development Status :: 2 - Pre-Alpha",
+    "Development Status :: 3 - Alpha",
     "Intended Audience :: Information Technology",
     "Intended Audience :: System Administrators",
     "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
     "Programming Language :: Python :: 3.11",
     "Topic :: Security",
     "Topic :: Security :: Threat Intelligence",
+    "Topic :: Security :: Vulnerability Assessment",
 ]
 
 dependencies = [
