@@ -8,39 +8,37 @@ import sys
 import logging
 from . import __version__, __description__, VERSION_CODENAME
 
+# ─── Pure ASCII banner (console-safe) ──────────────────────────
+S = " "  # shortcut for banner building
 
+_v = __version__
+_c = VERSION_CODENAME
 BANNER = f"""
-{" " * 4}▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-{" " * 4}▓▓{" " * 70}▓▓
-{" " * 4}▓▓{" " * 13}███████╗ ██████╗  ██████╗ ███╗   ██╗███████╗{" " * 13}▓▓
-{" " * 4}▓▓{" " * 13}██╔════╝██╔═══██╗██╔════╝ ████╗  ██║██╔════╝{" " * 13}▓▓
-{" " * 4}▓▓{" " * 13}█████╗  ██║   ██║██║  ███╗██╔██╗ ██║█████╗  {" " * 13}▓▓
-{" " * 4}▓▓{" " * 13}██╔══╝  ██║   ██║██║   ██║██║╚██╗██║██╔══╝  {" " * 13}▓▓
-{" " * 4}▓▓{" " * 13}██║     ╚██████╔╝╚██████╔╝██║ ╚████║███████╗{" " * 13}▓▓
-{" " * 4}▓▓{" " * 13}╚═╝      ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚══════╝{" " * 13}▓▓
-{" " * 4}▓▓{" " * 70}▓▓
-{" " * 4}▓▓{" " * 8}████████╗██╗  ██╗███████╗    ███████╗██╗   ██╗███████╗██╗ ██████╗ ███╗   ██╗{" * 1}▓▓
-{" " * 4}▓▓{" " * 8}╚══██╔══╝██║  ██║██╔════╝    ██╔════╝╚██╗ ██╔╝██╔════╝██║██╔═══██╗████╗  ██║{" * 1}▓▓
-{" " * 4}▓▓{" " * 8}   ██║   ███████║█████╗      █████╗   ╚████╔╝ █████╗  ██║██║   ██║██╔██╗ ██║{" * 1}▓▓
-{" " * 4}▓▓{" " * 8}   ██║   ██╔══██║██╔══╝      ██╔══╝    ╚██╔╝  ██╔══╝  ██║██║   ██║██║╚██╗██║{" * 1}▓▓
-{" " * 4}▓▓{" " * 8}   ██║   ██║  ██║███████╗    ███████╗   ██║   ███████╗██║╚██████╔╝██║ ╚████║{" * 1}▓▓
-{" " * 4}▓▓{" " * 8}   ╚═╝   ╚═╝  ╚═╝╚══════╝    ╚══════╝   ╚═╝   ╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝{" * 1}▓▓
-{" " * 4}▓▓{" " * 70}▓▓
-{" " * 4}▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-{" " * 4}▓▓{" " * 35}OmniGRAVITAS{" " * 35}▓▓
-{" " * 4}▓▓{" " * 10}{__description__}{" " * 10}▓▓
-{" " * 4}▓▓{" " * 5}GRAVITAS v{__version__} [{VERSION_CODENAME}]  +  OmniPentestX v1.0.0 [OmniForce]{" " * 5}▓▓
-{" " * 4}▓▓{" " * 70}▓▓
-{" " * 4}▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-{" " * 4}DarkMatter Security — Invisible Influence / Indirect Intelligence
-{" " * 4}Built by AntiSyntax.protocol CREW — Happy Birthday my BrotherBear! 🎂
++{'='*78}+
+|{' '*78}|
+|{' '*30}G R A V I T A S{' '*30}|
+|{' '*78}|
+|{' '*12}Inference-Based Reconnaissance & Predictive Intelligence Platform{' '*12}|
+|{' '*78}|
+|{' '*30}T H E   F U S I O N{' '*27}|
+|{' '*78}|
+|{' '*27}O M N I G R A V I T A S{' '*27}|
+|{' '*12}GRAVITAS Intelligence Pipeline  +  OmniPentestX Offensive Engine{' '*12}|
+|{' '*78}|
++{'='*78}+
+|{' '*78}|
+|{' '*4}Version: {_v} [{_c}]  +  OmniPentestX v1.0.0 [OmniForce]{' '*4}|
+|{' '*4}Organization: DarkMatter Security{' '*47}|
+|{' '*4}DarkMatter Security -- Invisible Influence / Indirect Intelligence{' '*20}|
+|{' '*78}|
++{'='*78}+
 """
 
 
 def main() -> None:
     """Main entry point."""
     if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
-        print(BANNER)
+        _safe_print(BANNER)
         print_usage()
         return
 
@@ -71,72 +69,82 @@ def main() -> None:
 def print_usage() -> None:
     """Print usage information."""
     print(f"""
-{" " * 4}GRAVITAS v{__version__} — {__description__}
-{" " * 4}OmniGRAVITAS Fusion Platform — DarkMatter Security
+{S*4}GRAVITAS v{__version__} -- {__description__}
+{S*4}OmniGRAVITAS Fusion Platform -- DarkMatter Security
 
-{" " * 4}USAGE:
-{" " * 8}python -m gravitas <command>
+{S*4}USAGE:
+{S*8}python -m gravitas <command>
 
-{" " * 4}COMMANDS:
-{" " * 8}ingest          Run V1: Data Ingestion pipeline
-{" " * 8}pipeline        Run full V1-V8 pipeline
-{" " * 8}v1              Run V1 Data Ingestion only
-{" " * 8}status          Show GRAVITAS system status
-{" " * 8}omnigravitas    Launch the OmniGRAVITAS fusion CLI
-{" " * 8}help            Show this message
+{S*4}COMMANDS:
+{S*8}ingest          Run V1: Data Ingestion pipeline
+{S*8}pipeline        Run full V1-V8 pipeline
+{S*8}v1              Run V1 Data Ingestion only
+{S*8}status          Show GRAVITAS system status
+{S*8}omnigravitas    Launch the OmniGRAVITAS fusion CLI
+{S*8}help            Show this message
 
-{" " * 4}ARCHITECTURE ROADMAP:
-{" " * 8}V1: Data Ingestion      [ACTIVE]
-{" " * 8}V2: Processing          [ACTIVE]
-{" " * 8}V3: Inference           [ACTIVE]
-{" " * 8}V4: Graph               [ACTIVE]
-{" " * 8}V5: Probability         [ACTIVE]
-{" " * 8}V6: Temporal            [ACTIVE]
-{" " * 8}V7: Digital Twin        [ACTIVE]
-{" " * 8}V8: Autonomous Engine   [ACTIVE]
+{S*4}ARCHITECTURE ROADMAP:
+{S*8}V1: Data Ingestion      [ACTIVE]
+{S*8}V2: Processing          [ACTIVE]
+{S*8}V3: Inference           [ACTIVE]
+{S*8}V4: Graph               [ACTIVE]
+{S*8}V5: Probability         [ACTIVE]
+{S*8}V6: Temporal            [ACTIVE]
+{S*8}V7: Digital Twin        [ACTIVE]
+{S*8}V8: Autonomous Engine   [ACTIVE]
 
-{" " * 4}EXAMPLES:
-{" " * 8}python -m gravitas ingest
-{" " * 8}python -m gravitas status
-{" " * 8}python -m gravitas omnigravitas
+{S*4}EXAMPLES:
+{S*8}python -m gravitas ingest
+{S*8}python -m gravitas status
+{S*8}python -m gravitas omnigravitas
 """)
 
 
 def show_status() -> None:
     """Show system status with OmniGRAVITAS banner."""
-    print(BANNER)
-    print(f"\n{' ' * 4}╔{'═' * 60}╗")
-    print(f"{' ' * 4}║  System Status: {'✓ INITIALIZED':<51}║")
-    print(f"{' ' * 4}║  Version: GRAVITAS v{__version__:<18}  +  OmniPentestX v1.0.0  ║")
-    print(f"{' ' * 4}║  Codename: {VERSION_CODENAME:<44}║")
-    print(f"{' ' * 4}║  Organization: DarkMatter Security{' ' * 37}║")
-    print(f"{' ' * 4}╚{'═' * 60}╝")
-    print(f"\n{' ' * 4}Engines:")
-    print(f"{' ' * 6}V1: Data Ingestion      [{'✓' if True else ' '}]  —  Collect intelligence from all sources")
-    print(f"{' ' * 6}V2: Processing           [{'✓' if True else ' '}]  —  Normalize, enrich, structure data")
-    print(f"{' ' * 6}V3: Inference            [{'✓' if True else ' '}]  —  Pattern recognition & threat detection")
-    print(f"{' ' * 6}V4: Graph                [{'✓' if True else ' '}]  —  Knowledge graph of entities & relationships")
-    print(f"{' ' * 6}V5: Probability          [{'✓' if True else ' '}]  —  Risk scoring & predictive likelihood")
-    print(f"{' ' * 6}V6: Temporal             [{'✓' if True else ' '}]  —  Time-series analysis & trend prediction")
-    print(f"{' ' * 6}V7: Digital Twin         [{'✓' if True else ' '}]  —  Virtual representation of target environment")
-    print(f"{' ' * 6}V8: Autonomous Engine    [{'✓' if True else ' '}]  —  Self-acting defense & deception deployment")
-    print(f"\n{' ' * 4}Bridge: OmniPentestX ↔ GRAVITAS [{'✓' if True else ' '}]")
+    _safe_print(BANNER)
+    sep = "=" * 60
+    print(f"\n{S*4}{sep}")
+    print(f"{S*4}  System Status:  INITIALIZED")
+    print(f"{S*4}  Version:        GRAVITAS v{__version__}  +  OmniPentestX v1.0.0")
+    print(f"{S*4}  Codename:       {VERSION_CODENAME}")
+    print(f"{S*4}  Organization:   DarkMatter Security")
+    print(f"{S*4}{sep}")
+    print(f"\n{S*4}Engines:")
+    print(f"{S*6}V1: Data Ingestion      [ACTIVE]   -- Collect intelligence from all sources")
+    print(f"{S*6}V2: Processing           [ACTIVE]   -- Normalize, enrich, structure data")
+    print(f"{S*6}V3: Inference            [ACTIVE]   -- Pattern recognition & threat detection")
+    print(f"{S*6}V4: Graph                [ACTIVE]   -- Knowledge graph of entities & relationships")
+    print(f"{S*6}V5: Probability          [ACTIVE]   -- Risk scoring & predictive likelihood")
+    print(f"{S*6}V6: Temporal             [ACTIVE]   -- Time-series analysis & trend prediction")
+    print(f"{S*6}V7: Digital Twin         [ACTIVE]   -- Virtual representation of target environment")
+    print(f"{S*6}V8: Autonomous Engine    [ACTIVE]   -- Self-acting defense & deception deployment")
+    print(f"\n{S*4}Bridge: OmniPentestX <-> GRAVITAS [ACTIVE]")
     print()
+
+
+def _safe_print(text: str) -> None:
+    """Print text with fallback for Unicode encoding errors."""
+    try:
+        print(text)
+    except UnicodeEncodeError:
+        # Fallback: encode to ASCII with replacement
+        print(text.encode('ascii', errors='replace').decode('ascii'))
 
 
 def _launch_omnigravitas() -> None:
     """Launch the OmniGRAVITAS fusion CLI interactive mode."""
-    print(BANNER)
-    print(f"{' ' * 4}Launching OmniGRAVITAS Fusion Shell...\n")
+    _safe_print(BANNER)
+    print(f"{S*4}Launching OmniGRAVITAS Fusion Shell...\n")
 
     try:
         from omnipentestx.interfaces.cli import cli_main
-        print(f"{' ' * 4}[+] Fusing GRAVITAS intelligence pipeline with OmniPentestX offensive engine...")
-        print(f"{' ' * 4}[+] Both systems initialized. Welcome to OmniGRAVITAS.\n")
+        print(f"{S*4}[+] Fusing GRAVITAS intelligence pipeline with OmniPentestX offensive engine...")
+        print(f"{S*4}[+] Both systems initialized. Welcome to OmniGRAVITAS.\n")
         cli_main()
     except ImportError:
-        print(f"{' ' * 4}[!] OmniPentestX not installed. Run: pip install omnipentestx")
-        print(f"{' ' * 4}[!] Falling back to GRAVITAS standalone mode.")
+        print(f"{S*4}[!] OmniPentestX not installed. Run: pip install omnipentestx")
+        print(f"{S*4}[!] Falling back to GRAVITAS standalone mode.")
         from .core.pipeline import run_pipeline
         run_pipeline()
 

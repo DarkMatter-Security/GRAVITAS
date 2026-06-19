@@ -183,8 +183,11 @@ class GRAVITASPipeline:
                     "temporal": temporal,
                     "graph": graph_state,
                 })
+            # entities may be int (count) or dict — handle both
+            _e = twin.get("entities", {}) if isinstance(twin, dict) else {}
+            _entity_count = len(_e) if isinstance(_e, (dict, list, str)) else int(_e)
             logger.info("  ✓ %d entities, health=%.2f",
-                        twin.get("entities", 0) if isinstance(twin, dict) else 0,
+                        _entity_count,
                         twin.get("overall_health", 0) if isinstance(twin, dict) else 0)
         except Exception as e:
             logger.error("✗ V7 digital twin sync failed: %s", e)
@@ -221,7 +224,7 @@ class GRAVITASPipeline:
                     temporal.get("summary", {}).get("num_bins", 0),
                     self._stage_timings.get("v6", 0))
         logger.info("  V7  Digital Twin │ %4d ents    │ %6.0fms",
-                    len(twin.get("entities", {})) if isinstance(twin, dict) else 0,
+                    len(twin.get("entities", {})) if isinstance(twin.get("entities", {}), (dict, list, str)) else int(twin.get("entities", 0)),
                     self._stage_timings.get("v7", 0))
         logger.info("  V8  Autonomous   │ %4d actions │ %6.0fms",
                     len(actions), self._stage_timings.get("v8", 0))
@@ -238,7 +241,7 @@ class GRAVITASPipeline:
             "graph_edges": graph_state.get("edges", 0) if isinstance(graph_state, dict) else 0,
             "scores": len(scores),
             "temporal_bins": temporal.get("summary", {}).get("num_bins", 0) if isinstance(temporal, dict) else 0,
-            "twin_entities": len(twin.get("entities", {})) if isinstance(twin, dict) else 0,
+            "twin_entities": len(twin.get("entities", {})) if isinstance(twin.get("entities", {}), (dict, list, str)) else int(twin.get("entities", 0)),
             "twin_health": twin.get("overall_health", 0) if isinstance(twin, dict) else 0,
             "actions": len(actions),
         }
